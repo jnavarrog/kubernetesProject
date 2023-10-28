@@ -17,8 +17,6 @@ spec:
           image: mysql:8.0
           ports:
             - containerPort: 3306
-          env:
-            - name: MYSQL_ROOT_PASSWORD
-              value: nextcloud
-            - name: MYSQL_DATABASE
-              value: nextcloud
+          envFrom:
+            - configMapRef:
+                name: configmap

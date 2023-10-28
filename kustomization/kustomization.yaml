@@ -7,3 +7,4 @@ resources:
  - nextcloud-service.yaml
  - nextcloud-data-pv.yaml
  - nextcloud-data-pvc.yaml
+ - configmap.yaml

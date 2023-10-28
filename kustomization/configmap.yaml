@@ -1,0 +1,12 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: configmap
+data:
+  #mysql
+  MYSQL_ROOT_PASSWORD: nextcloud
+  MYSQL_DATABASE: nextcloud
+  #Nextcloud
+  MYSQL_HOST: mysql-service #nombre del servicio mysql
+  MYSQL_USER: nextcloud
+  MYSQL_PASSWORD: nextcloud

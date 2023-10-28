@@ -17,13 +17,9 @@ spec:
           image: nextcloud:latest
           ports:
             - containerPort: 80
-          env:
-            - name: MYSQL_HOST
-              value: mysql-service  # Nombre del servicio de MySQL
-            - name: MYSQL_USER
-              value: nextcloud
-            - name: MYSQL_PASSWORD
-              value: nextcloud
+          envFrom:
+            - configMapRef:
+                name: configmap
           volumeMounts:
             - name: nextcloud-data
               mountPath: /var/www/html/data
