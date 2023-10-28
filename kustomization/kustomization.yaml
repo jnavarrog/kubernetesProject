@@ -1,0 +1,9 @@
+resources:
+ - mysql-deployment.yaml
+ - mysql-service.yaml
+ - mysql-pv.yaml
+ - mysql-pvc.yaml
+ - nextcloud-deployment.yaml
+ - nextcloud-service.yaml
+ - nextcloud-data-pv.yaml
+ - nextcloud-data-pvc.yaml
