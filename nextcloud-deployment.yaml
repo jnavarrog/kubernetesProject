@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextcloud
+  template:
+    metadata:
+      labels:
+        app: nextcloud
+    spec:
+      containers:
+        - name: nextcloud
+          image: nextcloud:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: MYSQL_HOST
+              value: mysql-service  # Nombre del servicio de MySQL
+            - name: MYSQL_USER
+              value: nextcloud
+            - name: MYSQL_PASSWORD
+              value: nextcloud
+          volumeMounts:
+            - name: nextcloud-data
+              mountPath: /var/www/html/data
+      volumes:
+        - name: nextcloud-data
+          persistentVolumeClaim:
+            claimName: nextcloud-data-pvc
