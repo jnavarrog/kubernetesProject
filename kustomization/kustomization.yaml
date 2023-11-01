@@ -1,4 +1,5 @@
 resources:
+ - configmap.yaml
  - mysql-deployment.yaml
  - mysql-service.yaml
  - mysql-pv.yaml
@@ -7,4 +8,9 @@ resources:
  - nextcloud-service.yaml
  - nextcloud-data-pv.yaml
  - nextcloud-data-pvc.yaml
- - configmap.yaml
+ - grafana-deployment.yaml
+ - grafana-service.yaml
+ - prometheus-deployment.yaml
+ - prometheus-service.yaml
+ - nodeExporter-daemonset.yaml
+ - nodeExporter-service.yaml
