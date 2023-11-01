@@ -1,0 +1,8 @@
+apiVersion: v2
+name: kubernetesProject
+description: Proyecto para el curso de computación en la nube con virtualización liviana (Kubernetes)
+version: 1.0.0
+type: application
+maintainers:
+  - name: Juan Navarro
+    email: juan.navarro@fing.edu.uy

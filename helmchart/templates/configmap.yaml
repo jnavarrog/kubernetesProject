@@ -1,0 +1,26 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: configmap
+data:
+  #mysql
+  MYSQL_ROOT_PASSWORD: nextcloud
+  MYSQL_DATABASE: nextcloud
+  #Nextcloud
+  MYSQL_HOST: mysql-service #nombre del servicio mysql
+  MYSQL_USER: nextcloud
+  MYSQL_PASSWORD: nextcloud
+  ##Prometheus
+  prometheus.yml: |-
+    global:
+      scrape_interval: 15s
+    scrape_configs:
+      - job_name: 'prometheus'
+        static_configs:
+          - targets: ['localhost:9090']
+      - job_name: 'node_exporter'
+        static_configs:
+          - targets: ['node-exporter:9100']
+  ##Grafana
+  GF_SECURITY_ADMIN_USER: admin
+  GF_SECURITY_ADMIN_PASSWORD: admin
