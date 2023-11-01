@@ -24,3 +24,10 @@ spec:
           image: prom/node-exporter:latest
           ports:
             - containerPort: 9100
+          resources:
+            limits:
+              cpu: "2"
+              memory: "1000Mi"
+            requests:
+              cpu: "1"
+              memory: "500Mi"
