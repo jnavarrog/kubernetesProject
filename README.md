@@ -39,7 +39,7 @@ Prometheus se despliega utilizando un deployment donde se agrega un livenessProb
 
 El agente node exporter se despliega como un DaemonSet ya que como su función es recopilar datos del nodo, es útil que se asegure su ejecución en todos los nodos. Se le configuran limites de consumo tanto de CPU como de memoria. Además expone su servicio mediante un servicio del tipo Cluster IP.
 
-## Parámetros
+# Parámetros
 
 | Parámetro                   | Descripción                                                | Valor por defecto         |
 |-----------------------------|------------------------------------------------------------|---------------------------|
@@ -72,6 +72,115 @@ El agente node exporter se despliega como un DaemonSet ya que como su función e
 
 # Despliegue y configuraciónes básicas
 
+Se explicará en detalle el despliegue utilizando Helm Charts. 
+
+1) Ejecutar el chart
+
+```
+helm install miproyecto helmchart
+```
+
+Se debe obtener la siguiente salida:
+
+```
+NAME: miproyecto
+LAST DEPLOYED: Thu Nov  2 18:15:00 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+Proyecto para el curso de computación en la nube con virtualización liviana (Kubernetes)
+Author: Juan Navarro - juan.navarro@fing.edu.uy
+Professor: Edgar Magana, Eduardo Grampin
+
+Images deployed
+-Nextcloud: nextcloud:stable
+-MySQL: mysql:8.2.0
+-Prometheus: prom/prometheus:v2.47.2
+-Grafana: grafana/grafana:10.2.0
+-Node Exporter: prom/node-exporter:v1.6.1
+
+External access
+-Nextcloud: http://localhost:80
+-Prometheus: http://localhost:8081
+-Grafana: http://localhost:8080
+
+To get the Prometheus endpoint for configuration in Grafana, run the following command:
+
+kubectl get endpoints | grep prometheus-service | awk '{print $2}'
+```
+
+2) Verificar que este todo corriendo correctamente
+
+```
+% helm list
+NAME      	NAMESPACE	REVISION	UPDATED                             	STATUS  	CHART                  	APP VERSION
+miproyecto	default  	1       	2023-11-02 18:15:00.700159 -0300 -03	deployed	kubernetesProject-1.0.0
+```
+
+```
+% kubectl get pods
+NAME                                    READY   STATUS    RESTARTS   AGE
+grafana-deployment-749956f69f-hft9j     1/1     Running   0          6m57s
+mysql-deployment-6d6d99c5b9-q7sjk       1/1     Running   0          6m57s
+nextcloud-deployment-7b74f746df-gnfz6   1/1     Running   0          6m57s
+node-exporter-vm278                     1/1     Running   0          6m57s
+prometheus-deployment-b9dc47d7b-plgmv   1/1     Running   0          6m57s
+```
+
+```
+% kubectl get deployments
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+grafana-deployment      1/1     1            1           7m9s
+mysql-deployment        1/1     1            1           7m9s
+nextcloud-deployment    1/1     1            1           7m9s
+prometheus-deployment   1/1     1            1           7m9s
+```
+
+```
+% kubectl get services
+NAME                 TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+grafana-service      LoadBalancer   10.104.127.224   localhost     8080:31362/TCP   7m15s
+kubernetes           ClusterIP      10.96.0.1        <none>        443/TCP          5d1h
+mysql-service        ClusterIP      10.96.87.172     <none>        3306/TCP         7m15s
+nextcloud-service    LoadBalancer   10.106.175.53    localhost     80:31175/TCP     7m15s
+node-exporter        ClusterIP      10.98.52.185     <none>        9100/TCP         7m15s
+prometheus-service   LoadBalancer   10.107.47.252    localhost     8081:32533/TCP   7m15s
+```
+
+```
+% kubectl get daemonsets
+NAME            DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+node-exporter   1         1         1       1            1           <none>          7m25s
+```
+
+```
+% kubectl get endpoints
+NAME                 ENDPOINTS           AGE
+grafana-service      10.1.0.250:3000     7m31s
+kubernetes           192.168.65.3:6443   5d1h
+mysql-service        10.1.0.246:3306     7m31s
+nextcloud-service    10.1.0.249:80       7m31s
+node-exporter        10.1.0.247:9100     7m31s
+prometheus-service   10.1.0.248:9090     7m31s
+```
+
+```
+ % kubectl get pv
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+mysql-pv                                   1Gi        RWO            Retain           Available                                                        10m
+nextcloud-data-pv                          5Gi        RWO            Retain           Available                                                        10m
+pvc-13f71c10-9c7d-4d93-aa5e-e034346929c3   1Gi        RWO            Delete           Bound       default/mysql-pvc            hostpath                10m
+pvc-72145978-8ec2-42cf-813d-c89b92f719dd   5Gi        RWO            Delete           Bound       default/nextcloud-data-pvc   hostpath                10m
+```
+
+```
+% kubectl get pvc
+NAME                 STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+mysql-pvc            Bound    pvc-13f71c10-9c7d-4d93-aa5e-e034346929c3   1Gi        RWO            hostpath       10m
+nextcloud-data-pvc   Bound    pvc-72145978-8ec2-42cf-813d-c89b92f719dd   5Gi        RWO            hostpath       10m
+```
 
 # Referencias
 
