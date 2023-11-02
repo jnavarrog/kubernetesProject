@@ -182,6 +182,10 @@ mysql-pvc            Bound    pvc-13f71c10-9c7d-4d93-aa5e-e034346929c3   1Gi    
 nextcloud-data-pvc   Bound    pvc-72145978-8ec2-42cf-813d-c89b92f719dd   5Gi        RWO            hostpath       10m
 ```
 
+3) Nextcloud
+
+3.1) En el navegador ingresar a http://localhost:80
+
 # Referencias
 
 [1]https://nextcloud.com/es/
