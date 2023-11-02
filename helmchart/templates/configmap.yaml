@@ -4,16 +4,16 @@ metadata:
   name: configmap
 data:
   #mysql
-  MYSQL_ROOT_PASSWORD: nextcloud
-  MYSQL_DATABASE: nextcloud
+  MYSQL_ROOT_PASSWORD: {{ .Values.mysql.mysql_root_password }}
+  MYSQL_DATABASE: {{ .Values.mysql.mysql_database }}
   #Nextcloud
-  MYSQL_HOST: mysql-service #nombre del servicio mysql
-  MYSQL_USER: nextcloud
-  MYSQL_PASSWORD: nextcloud
+  MYSQL_HOST: {{ .Values.nextcloud.mysql_host }} #nombre del servicio mysql
+  MYSQL_USER: {{ .Values.nextcloud.mysql_user }}
+  MYSQL_PASSWORD: {{ .Values.nextcloud.mysql_password }}
   ##Prometheus
   prometheus.yml: |-
     global:
-      scrape_interval: 15s
+      scrape_interval: 3s
     scrape_configs:
       - job_name: 'prometheus'
         static_configs:
@@ -22,5 +22,5 @@ data:
         static_configs:
           - targets: ['node-exporter:9100']
   ##Grafana
-  GF_SECURITY_ADMIN_USER: admin
-  GF_SECURITY_ADMIN_PASSWORD: admin
+  GF_SECURITY_ADMIN_USER: {{ .Values.grafana.default_user }}
+  GF_SECURITY_ADMIN_PASSWORD: {{ .Values.grafana.default_password }}

@@ -7,6 +7,6 @@ spec:
     app: grafana
   ports:
     - name: web
-      port: 8080
+      port: {{ .Values.grafana.externalport }}
       targetPort: 3000
   type: LoadBalancer

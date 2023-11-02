@@ -4,8 +4,8 @@ metadata:
   name: mysql-pv
 spec:
   capacity:
-    storage: 1Gi
+    storage: {{ .Values.mysql.pv_size }}
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /Users/juan/Kubernetes/storage
+    path: {{ .Values.mysql.pv_path }}

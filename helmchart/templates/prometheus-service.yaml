@@ -10,6 +10,6 @@ spec:
     app: prometheus
   ports:
     - name: web
-      port: 8081
+      port: {{ .Values.prometheus.externalport }}
       targetPort: 9090
   type: LoadBalancer

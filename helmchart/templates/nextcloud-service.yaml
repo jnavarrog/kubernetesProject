@@ -7,6 +7,6 @@ spec:
     app: nextcloud
   ports:
     - protocol: TCP
-      port: 80
+      port: {{ .Values.nextcloud.externalport }}
       targetPort: 80
   type: LoadBalancer

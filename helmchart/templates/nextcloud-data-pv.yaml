@@ -4,8 +4,8 @@ metadata:
   name: nextcloud-data-pv
 spec:
   capacity:
-    storage: 5Gi
+    storage: {{ .Values.nextcloud.pv_size }}
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /Users/juan/Kubernetes/storage
+    path: {{ .Values.nextcloud.pv_path }}
