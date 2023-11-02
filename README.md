@@ -184,7 +184,21 @@ nextcloud-data-pvc   Bound    pvc-72145978-8ec2-42cf-813d-c89b92f719dd   5Gi    
 
 3) Nextcloud
 
-3.1) En el navegador ingresar a http://localhost:80
+En el navegador ingresar a http://localhost:80, se solicitará crear el usuario administrador, ingresar un nombre de usuario, contraseña y hacer click en install.
+
+![Mi Imagen](./data/screenshots/next1.png)
+
+Luego de unos minutos se completará la instalación y se redirigirá a la página principal del usuario administrador.
+
+![Mi Imagen](./data/screenshots/next2.png)
+
+***Observación:*** El despliegue esta configurado para reconocer automaticamente el servidor y los datos de la base de datos. En caso de que no suceda se debe ingresar la IP del servidor MySQL, se puede obtener con el siguiente comando:
+
+```
+kubectl get services | grep mysql-service | awk '{print $3}'
+```
+
+
 
 # Referencias
 
