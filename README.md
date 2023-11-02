@@ -23,6 +23,14 @@ El despliegue se puede realizar de dos formas, utilizando Kustomization o utiliz
 
 El despliegue de Nextcloud consta de un deployment, un service, un persitent volume y un persistent volume claim. En el deployment como configuración a destacar, se utilizó un configmap para pasarle al contenedor los datos de conexión a la base de datos y se agrego un livenessProbe. El service se configura como LoadBalancer para poder acceder al puerto 80 del contenedor mediante un puerto configurable en localhost.
 
+## MySQL
+
+Al igual que Nextcloud consiste en un deployment, un service, un persitent volume y un persistent volume claim. La configuración es la estándar. También se utilizó un configmap con el nombre de la base de datos que debe crear y la contraseña de root.
+
+## Grafana
+
+Para Grafana se utilizó un deployment y un service. En el deployment se configuró un livenessProbe y mediante el configmap se le pasa el usuario y contraseña por defecto. En el service se crea el LoadBalancer que permite acceder al sitio desde el exterior (localhost) en un puerto configurable.
+
 
 
 #Referencias
