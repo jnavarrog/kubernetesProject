@@ -25,7 +25,7 @@ El despliegue de Nextcloud consta de un deployment, un service, un persitent vol
 
 ## MySQL
 
-Al igual que Nextcloud consiste en un deployment, un service, un persitent volume y un persistent volume claim. La configuración es la estándar. También se utilizó un configmap con el nombre de la base de datos que debe crear y la contraseña de root.
+Al igual que Nextcloud, consiste en un deployment, un service, un persitent volume y un persistent volume claim. La configuración es la estándar. También se utilizó un configmap con el nombre de la base de datos que debe crear y la contraseña de root.
 
 ## Grafana
 
@@ -33,11 +33,11 @@ Para Grafana se utilizó un deployment y un service. En el deployment se configu
 
 ## Prometheus
 
-Prometheus se despliega utilizando un deployment donde se agrega un livenessProbe y se le pasan dos argumentos (archivo de configuración y ruta de la base de datos) al container, y un service del tipo LoadBalancer para acceder al sistema desde el exterior (localhost) en un puerto configurable. Mediante el configmap edita el archivo de configuración para indicarle a Prometheus que debe incluir al Node Exporter como fuente de datos.
+Prometheus se despliega utilizando un deployment donde se agrega un livenessProbe y se le pasan dos argumentos (archivo de configuración y ruta de la base de datos) al container, y un service del tipo LoadBalancer para acceder al sistema desde el exterior (localhost) en un puerto configurable. Mediante el configmap se edita el archivo de configuración para indicarle a Prometheus que debe incluir al Node Exporter como fuente de datos.
 
 ## Node Exporter
 
-El agente node exporter se despliega como un DaemonSet ya que como su función es recopilar datos del nodo, es útil que se asegure su ejecución en todos los nodos. Se le configuran limites de consumo tanto de CPU como de memoria. Además expone su servicio mediante un servicio del tipo Cluster IP.
+El agente node exporter se despliega como un DaemonSet ya que como su función es recopilar datos del nodo, es útil que se asegure su ejecución en todos los nodos. Se le configuran limites de consumo tanto de CPU como de memoria. Además expone su servicio mediante un service del tipo Cluster IP.
 
 # Parámetros
 
@@ -50,7 +50,7 @@ El agente node exporter se despliega como un DaemonSet ya que como su función e
 | nextcloud.pv_path           | Path del PV                                                |                           |
 | nextcloud.pvc_size          | Tamaño del PVC                                             | 5Gi                       |
 | nextcloud.image             | Imagen utilizada                                           | nextcloud:stable          |
-| nextcloud.replicas          | Pantidad de replicas del pod                               | 1                         |
+| nextcloud.replicas          | Cantidad de replicas del pod                               | 1                         |
 | nextcloud.externalport      | Puerto del host al cual se redirige el puerto del servicio | 80                        |
 | mysql.mysql_root_password   | Contraseña del usuario root                                | nextcloud                 |
 | mysql.mysql_database        | Base de datos a crear                                      | nextcloud                 |
@@ -65,14 +65,14 @@ El agente node exporter se despliega como un DaemonSet ya que como su función e
 | grafana.image               | Imagen utilizada                                           | grafana/grafana:10.2.0    |
 | grafana.externalport        | Puerto del host al cual se redirige el puerto del servicio | 8080                      |
 | node_exporter.image         | Imagen utilizada                                           | prom/node-exporter:v1.6.1 |
-| node_exporter.cpulimit      | Limite de utilización de CPU                               | 2                         |
+| node_exporter.cpulimit      | Límite de utilización de CPU                               | 2                         |
 | node_exporter.request       | Cantidad de CPU solicitado                                 | 1                         |
-| node_exporter.memorylimit   | Limite de utilización de memoria                           | 1000Mi                    |
+| node_exporter.memorylimit   | Límite de utilización de memoria                           | 1000Mi                    |
 | node_exporter.memoryrequest | Cantidad de memoria solicitada                             | 500Mi                     |
 
 # Despliegue y configuraciónes básicas
 
-Se explicará en detalle el despliegue utilizando Helm Charts. 
+Se explicará el despliegue utilizando Helm Charts. 
 
 1) Ejecutar el chart
 
@@ -111,7 +111,7 @@ To get the Prometheus endpoint for configuration in Grafana, run the following c
 kubectl get endpoints | grep prometheus-service | awk '{print $2}'
 ```
 
-2) Verificar que este todo corriendo correctamente
+2) Verificar que esté todo corriendo correctamente
 
 ```
 % helm list
@@ -212,7 +212,7 @@ En el navegador ingresar a http://localhost:8080, se solicitará el usuario y co
 
 ![Mi Imagen](./data/screenshots/gra2.png)
 
-Una vez que se haya ingresado, lo primero es agregar el data source, en este caso prometheus. Ir a Home->Connections->Data sources, alli se elige Prometheus y se debe colocar la IP y puerto del endpoint de Prometheus, estos datos se pueden obtener de la siguiente forma:
+Una vez que se haya ingresado, lo primero es agregar el data source, en este caso prometheus. Ir a Home->Connections->Data sources, allí se elige Prometheus y se debe colocar la IP y puerto del endpoint de Prometheus, estos datos se pueden obtener de la siguiente forma:
 
 ```
 kubectl get endpoints | grep prometheus-service | awk '{print $2}'
