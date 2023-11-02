@@ -222,6 +222,19 @@ Para agregar un dashboard ir a Home->Dashboards->Create dashboard->Add visualiza
 
 ![Mi Imagen](./data/screenshots/gra3.png)
 
+6) Finalmente para matar todo el chart se debe ejecutar el siguiente comando
+
+```
+helm delete miproyecto
+```
+
+# Conclusiones
+
+Con la realización de este trabajo se buscó aplicar los conocimientos del curso de la manera mas amplia posible. Para ello se crearon varios servicios utilizando muchos de los resourses vistos (deployment, service, daemonset, configmap, pv, pvc, etc). También se estudiaron los parámetros mas relevantes de cada resourse y se aplicaron.
+
+Se comenzó trabajando directamente en Kubernetes, creando los yaml y "ejecutandolos" de a uno, luego se paso a utilizar Kustomization para ser mas eficiente y finalmente Helm Charts, que es una herramienta que no se vio en el curso pero se recomendó usar. Luego de estudiar su funcionamiento y aplicarlo en este trabajo quedan claras las ventajas de su utilización. Otro aspecto a destacar es que se estuvo constantemente utilizando los comandos de Kubertenes (kubectl get ..., kubectl describe ..., etc) para verificar el correcto despliegue de los servicios.
+
+Como reflexión final sobre Kubernetes entiendo que es una plataforma sumamente útil, escalable y versátil que simplifica la gestión de contenedores. Su popularidad en el mundo de la administración de contenedores lo convierte en una herramienta esencial que permite a las organizaciones aprovechar al máximo los beneficios de la contenerización y la automatización en entornos de nube e infraestructura distribuida. Con Kubernetes, las empresas pueden mejorar la agilidad, la confiabilidad y la eficiencia de sus aplicaciones, lo que lo convierte en una tecnología clave en la era de la infraestructura como código y la nube.
 
 
 # Referencias
