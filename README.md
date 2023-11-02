@@ -198,6 +198,20 @@ Luego de unos minutos se completará la instalación y se redirigirá a la pági
 kubectl get services | grep mysql-service | awk '{print $3}'
 ```
 
+4) Prometheus
+
+En el navegador ingresar a http://localhost:8081, ir a Status->Targets y verificar que el Node-Exporter fue reconocido.
+
+![Mi Imagen](./data/screenshots/prom1.png)
+
+5) Grafana
+
+En el navegador ingresar a http://localhost:8080, se solicitará el usuario y contraseña por defecto.
+
+![Mi Imagen](./data/screenshots/gra1.png)
+
+Una vez que se haya ingresado, lo primero es agregar el data source, en este caso prometheus. Ir a Home->Connections->Data sources
+
 
 
 # Referencias
