@@ -4,7 +4,7 @@ nextcloud:
   mysql_password: nextcloud
   pv_size: 5Gi
   pv_path: /User/juan/Kubernetes/storage
-  pvc_path: 5Gi
+  pvc_size: 5Gi
   image: nextcloud:stable
   replicas: 1
   externalport: 80
