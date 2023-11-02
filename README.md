@@ -19,6 +19,12 @@ El despliegue se puede realizar de dos formas, utilizando Kustomization o utiliz
 - Prometheus[4] como recolector de datos.
 - Node Exporter[5] como agente de Prometheus.
 
+## Nextcloud
+
+El despliegue de Nextcloud consta de un deployment, un service, un persitent volume y un persistent volume claim. En el deployment como configuración a destacar, se utilizó un configmap para pasarle al contenedor los datos de conexión a la base de datos y se agrego un livenessProbe. El service se configura como LoadBalancer para poder acceder al puerto 80 del contenedor mediante un puerto configurable en localhost.
+
+
+
 #Referencias
 
 [1]https://nextcloud.com/es/
