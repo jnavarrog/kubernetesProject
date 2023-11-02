@@ -210,7 +210,17 @@ En el navegador ingresar a http://localhost:8080, se solicitará el usuario y co
 
 ![Mi Imagen](./data/screenshots/gra1.png)
 
-Una vez que se haya ingresado, lo primero es agregar el data source, en este caso prometheus. Ir a Home->Connections->Data sources
+![Mi Imagen](./data/screenshots/gra2.png)
+
+Una vez que se haya ingresado, lo primero es agregar el data source, en este caso prometheus. Ir a Home->Connections->Data sources, alli se elige Prometheus y se debe colocar la IP y puerto del endpoint de Prometheus, estos datos se pueden obtener de la siguiente forma:
+
+```
+kubectl get endpoints | grep prometheus-service | awk '{print $2}'
+```
+
+Para agregar un dashboard ir a Home->Dashboards->Create dashboard->Add visualization, se selecciona la fuente de datos y luego se agregan las queries deseadas, todas las que comienzan con node son las aportadas por el Node-Exporter.
+
+![Mi Imagen](./data/screenshots/gra3.png)
 
 
 
