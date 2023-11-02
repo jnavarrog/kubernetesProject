@@ -69,10 +69,11 @@ El agente node exporter se despliega como un DaemonSet ya que como su función e
 | node_exporter.request       | Cantidad de CPU solicitado                                 | 1                         |
 | node_exporter.memorylimit   | Limite de utilización de memoria                           | 1000Mi                    |
 | node_exporter.memoryrequest | Cantidad de memoria solicitada                             | 500Mi                     |
-|                             |                                                            |                           |
+
+# Despliegue y configuraciónes básicas
 
 
-#Referencias
+# Referencias
 
 [1]https://nextcloud.com/es/
 
