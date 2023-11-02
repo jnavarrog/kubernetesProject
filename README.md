@@ -41,7 +41,35 @@ El agente node exporter se despliega como un DaemonSet ya que como su función e
 
 ## Parámetros
 
-
+| Parámetro                   | Descripción                                                | Valor por defecto         |
+|-----------------------------|------------------------------------------------------------|---------------------------|
+| nexcloud.mysql_host         | Contenedor donde se encuentra la base de datos             | mysql-service             |
+| nextcloud.mysql_user        | Usuario de la basde datos                                  | nextcloud                 |
+| nextcloud.mysql_password    | Contraseña de la base de datos                             | nextcloud                 |
+| nextcloud.pv_size           | Tamaño del PV                                              | 5Gi                       |
+| nextcloud.pv_path           | Path del PV                                                |                           |
+| nextcloud.pvc_size          | Tamaño del PVC                                             | 5Gi                       |
+| nextcloud.image             | Imagen utilizada                                           | nextcloud:stable          |
+| nextcloud.replicas          | Pantidad de replicas del pod                               | 1                         |
+| nextcloud.externalport      | Puerto del host al cual se redirige el puerto del servicio | 80                        |
+| mysql.mysql_root_password   | Contraseña del usuario root                                | nextcloud                 |
+| mysql.mysql_database        | Base de datos a crear                                      | nextcloud                 |
+| mysql.image                 | Image utilizada                                            | mysql:8.2.0               |
+| mysql.pv_size               | Tamaño del PV                                              | 1Gi                       |
+| mysql.pv_path               | Path del PV                                                |                           |
+| mysql.pvc_size              | Tamaño del PVC                                             | 1Gi                       |
+| prometheus.image            | Imagen utilizada                                           | prom/prometheus:v2.47.2   |
+| prometheus.externalport     | Puerto del host al cual se redirige el puerto del servicio | 8081                      |
+| grafana.default_user        | Usuario por defecto                                        | admin                     |
+| grafana.default_password    | Contraseña por defecto                                     | admin                     |
+| grafana.image               | Imagen utilizada                                           | grafana/grafana:10.2.0    |
+| grafana.externalport        | Puerto del host al cual se redirige el puerto del servicio | 8080                      |
+| node_exporter.image         | Imagen utilizada                                           | prom/node-exporter:v1.6.1 |
+| node_exporter.cpulimit      | Limite de utilización de CPU                               | 2                         |
+| node_exporter.request       | Cantidad de CPU solicitado                                 | 1                         |
+| node_exporter.memorylimit   | Limite de utilización de memoria                           | 1000Mi                    |
+| node_exporter.memoryrequest | Cantidad de memoria solicitada                             | 500Mi                     |
+|                             |                                                            |                           |
 
 
 #Referencias
