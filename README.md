@@ -39,6 +39,10 @@ Prometheus se despliega utilizando un deployment donde se agrega un livenessProb
 
 El agente node exporter se despliega como un DaemonSet ya que como su función es recopilar datos del nodo, es útil que se asegure su ejecución en todos los nodos. Se le configuran limites de consumo tanto de CPU como de memoria. Además expone su servicio mediante un servicio del tipo Cluster IP.
 
+## Parámetros
+
+
+
 
 #Referencias
 
